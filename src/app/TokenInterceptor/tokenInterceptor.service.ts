@@ -50,10 +50,33 @@ export class TokenInterceptorService implements HttpInterceptor{
   }
 
   errorSwal(err : any){
+    let head = '';
+    let detail = '';
+
+    if(err.status == 500){
+      head =  err.error.status + '  Server Error : ' + err.error.error 
+      detail =  ' Detail : ' + err.error.message 
+    }else if(err.status == 404){
+      head =  err.error.status + '  Not found path Server : ' + err.error.error 
+      detail =  ' Detail : ' + err.error.message 
+    }else if(err.status == 400){
+      head =  err.error.status + ' Request Bad Server : ' + err.error.error 
+      detail =  ' Detail : ' + err.error.message 
+    }else if([401, 403].includes(err.status)){
+      head =  err.error.status + ' Permission Server : ' + err.error.error 
+      detail =  ' Detail : ' + err.error.message 
+    }
+
+    let textHtml = '<b>' + head + '</b>' + '<p>' + '<b> Detail : </b>' + detail + '</p>'
+
     Swal.fire({
+      title: "<strong>กรุณาติดต่อ Admin!</strong>",
       icon: "error",
-      title: "กรุณาติดต่อ Admin!",
-      text: err.error.status + " : " +err.error.error + " : " + err.error.message,
+      html: textHtml,
+      showCloseButton: false,
+      showCancelButton: false,
+      focusConfirm: true,
+      allowOutsideClick: false,
       confirmButtonText: 'ตกลง',
       heightAuto: false,
     }).then(res=>{
@@ -63,6 +86,14 @@ export class TokenInterceptorService implements HttpInterceptor{
         this.router.navigate(['/auth/signin']);
       }
     });
+
+    // Swal.fire({
+    //   icon: "error",
+    //   title: "กรุณาติดต่อ Admin!",
+    //   text: text,
+    //   confirmButtonText: 'ตกลง',
+    //   heightAuto: false,
+    // })
   }
 
 }

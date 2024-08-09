@@ -40,8 +40,8 @@ export const CALL_SERVICE = {
         getById : "/user/detail/getById",
         getCustomerAll : "/user/detail/getCustomerAll",
         delete : "/user/detail/delete",
-        checkUsreName : "/user/detail/checkUsreName",
-        save : "/user/detail/save",
+        CHECK_USERNAME : "/user/checkUsreName",
+        SAVE_CUSTOMER : "/user/saveCustomer",
         getPrefixAll : "/user/detail/getPrefixAll",
     },IMPORT_PRODUCT:{
         save : "/import/product/save",

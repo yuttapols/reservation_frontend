@@ -23,4 +23,17 @@ constructor(private http: HttpClient,) { }
     return this.http.get(url)
   }
 
+  checkUsreName(userName : any) : Observable<any> {
+    let url = apiUrl.concat(APP.API_VERSION.concat(CALL_SERVICE.USER.CHECK_USERNAME)).concat('?userName=' + userName);
+    return this.http.get(url)
+  }
+
+  saveCustomer(data : any) : Observable<any> {
+    const body = JSON.stringify(data);
+    let url = apiUrl.concat(APP.API_VERSION.concat(CALL_SERVICE.USER.SAVE_CUSTOMER));
+    return this.http.put<any>(url, body, httpOptions)
+  }
+
+
+
 }
